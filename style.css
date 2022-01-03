@@ -13,6 +13,10 @@
     font-family: 'attache';
     src: url('font/Rochester.ttf') format('truetype');
 }
+@font-face {
+    font-family: 'canal';
+    src: url('font/Futura Bold.otf') format('truetype');
+}
 
 body {
     font-family: 'Luxurious Roman', cursive;
@@ -63,6 +67,28 @@ h1, h2, h3, h4, p, small {
 }
 #gregorien > p {
     font-style: italic;
+}
+footer {
+    font-size: 1rem;
+    position: absolute;
+    left: 50%;
+    display: flex;
+    transform: translate(-50%, -50%);
+}
+footer > div {
+    display: flex;
+    justify-content: space-evenly;
+    width: 104px;
+    background: linear-gradient(to right, #03224c 58%, #fcddb3 50%);
+}
+footer > div > p {
+    font-family: 'canal';
+}
+footer > div > p:first-child {
+    color: #fcddb3;
+}
+footer > div > p:last-child {
+    color: #03224c;
 }
 @media all and (max-width: 1623px) {
     .dateR {
