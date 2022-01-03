@@ -168,6 +168,7 @@ footer > div > p:last-child {
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="calendrier-republicain/index.js"></script>
 <script>
+$('footer').css('top',$(window).height()-$('footer').height()+"px")
 var date, dateRep, options, horaire, h, min, sec, now, heure, minute, seconde, an, romain;
 function firstLetterUC(mot) {
 mot = mot.split(" ");
