@@ -6,7 +6,7 @@
     <link rel="shortcut icon" type="image/png" href="drapeau_icon.png">
     <link rel="stylesheet" href="style.css">
     <title> Calendrier </title>
-<style>
+<!-- <style>
 @import url('https://fonts.googleapis.com/css2?family=Luxurious+Roman&display=swap');
 
 * {
@@ -138,10 +138,10 @@ footer > div > p:last-child {
         font-size: 1.25rem;
     }
 }
-</style>
+</style> -->
 </head>
 <body>
-<section>
+<section id="direct">
     <article>
         <div id="gregorien">
             <h1></h1>
@@ -153,9 +153,29 @@ footer > div > p:last-child {
             <p class="jourR"></p>
             <p class="dateR"></p>
             <p class="hR"></p>
-
         </div>
     </article>
+</section>
+<section id="sect_conv">
+   <a href="#conversion"> <button id="button_conv"> Conversion </button> </a>
+</section>
+<section id="conversion">
+    <article>
+        <div id="gregorien">
+            <h1> CONVERSION RÉPUBLICAINE</h1>
+
+            <input type="datetime-local" id="input_date">
+
+        </div>
+        <div id="republic">
+            <p class="jourC"></p>
+            <p class="dateC"></p>
+            <p class="hC"></p>
+        </div>
+    </article>
+</section>
+<section id="sect_direct">
+   <a href="#direct"> <button id="button_direct"> Calendrier </button> </a>
 </section>
 <footer>
     <p> Copyright © 2022&nbsp; </p> 
@@ -167,7 +187,11 @@ footer > div > p:last-child {
 </footer>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="calendrier-republicain/index.js"></script>
+<script src="script/conversion.js"></script>
 <script>
+$('#sect_conv').css('bottom',$('footer').height()+"px")
+$('#sect_direct').css('top',($(document).height()-$('#sect_direct').height()-$('footer').height())+"px")
+
 $('footer').css('top',$(window).height()-$('footer').height()+"px")
 var date, dateRep, options, horaire, h, min, sec, now, heure, minute, seconde, an, romain;
 function firstLetterUC(mot) {
@@ -217,7 +241,7 @@ minute < 10 ? minute="0"+minute : minute=minute
 seconde < 10 ? seconde="0"+seconde : seconde=seconde
 horDec=heure+" h "+minute+" : "+seconde;
 
-$('h1').html("CALENDRIER RÉPUBLICAIN (an "+year(date)+')')
+$('h1').eq(0).html("CALENDRIER RÉPUBLICAIN (an "+year(date)+')')
 $(".dateR").html(firstLetterUC(dateRep));
 $(".hR").html(horDec);
 $(".jourR").html(firstLetterUC(dayOfYearName(date)));

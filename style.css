@@ -18,6 +18,16 @@
     src: url('font/Futura Bold.otf') format('truetype');
 }
 
+::selection {
+    background-color: black;
+    color: white;
+}
+
+html {
+    scroll-behavior: smooth;
+    overflow-y: hidden;
+}
+
 body {
     font-family: 'Luxurious Roman', cursive;
     font-size: 24px;
@@ -47,13 +57,13 @@ h1, h2, h3, h4, p, small {
 #republic > p {
     font-family: 'attache';
 }
-.jourR {
+.jourR, .jourC {
     font-size: 2.5rem;
 }
-.dateR {
+.dateR, .dateC {
     font-size: 8rem;
 }
-.hR {
+.hR, .hC {
     font-size: 3rem;
 }
 #gregorien {
@@ -68,9 +78,45 @@ h1, h2, h3, h4, p, small {
 #gregorien > p {
     font-style: italic;
 }
+#sect_conv, #sect_direct {
+    position: absolute;
+    margin-bottom: 25px;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+#button_conv, #button_direct {
+    font-style: italic;
+    font-family: 'Luxurious Roman';
+    border: none;
+    background-color: aqua;
+    font-size: 2rem;
+    padding: 5px;
+    border-radius: 7px;
+    cursor: pointer;
+    transition: 0.5s background-color, 0.5s letter-spacing;
+}
+#button_direct {
+    margin-bottom: 35px;
+}
+#button_conv:hover, #button_direct:hover {
+    background-color: aquamarine;
+    letter-spacing: 5px;
+    transition: all 0.5s;
+}
+input[type="datetime-local"] {
+    margin-top: 10px;
+    text-align: center;
+    background: none;
+    border: solid 2px black;
+    padding: 4px 12px 4px 12px;
+    border-radius: 5px;
+    font-family: 'Luxurious Roman';
+    font-weight: bolder;
+    font-size: 18px;
+}
 footer {
     font-size: 1rem;
-    position: absolute;
+    position: fixed;
     left: 50%;
     display: flex;
     transform: translate(-50%, -50%);
@@ -91,35 +137,35 @@ footer > div > p:last-child {
     color: #03224c;
 }
 @media all and (max-width: 1623px) {
-    .dateR {
+    .dateR, .dateC {
         font-size: 7rem;
     }
 }
 @media all and (max-width: 1420px) {
-    .dateR {
+    .dateR, .dateC {
         font-size: 6rem;
     }
 }
 @media all and (max-width: 1217px) {
-    .dateR {
+    .dateR, .dateC {
         font-size: 5rem;
     }
 }
 @media all and (max-width: 1014px) {
-    .dateR {
+    .dateR, .dateC {
         font-size: 4rem;
     }
 }
 @media all and (max-width: 811px) {
-    .dateR {
+    .dateR, .dateC {
         font-size: 3rem;
     }
 }
 @media all and (max-width: 610px) {
-    .dateR {
+    .dateR, .dateC {
         font-size: 2.5rem;
     }
-    .hR, .jourR {
+    .hR, .hC, .jourR, .jourC {
         font-size: 1.5rem;
     }
     #gregorien > h1 {
