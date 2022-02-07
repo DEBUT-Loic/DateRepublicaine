@@ -6,7 +6,8 @@ $("#input_date").keyup(function() {
         console.log(dC.getMonth());
         dateConv=dayOfDecadeName(dC)+' '+dayOfMonth(dC)+' '+monthName(dC)+' an '+chiffreRomain(year(dC));
         console.log(dateConv);
-
+        
+        $('#conversion span').html('(an '+year(dC)+')')
         $(".dateC").html(firstLetterUC(dateConv));
         $(".jourC").html(firstLetterUC(dayOfYearName(dC)));      
 
