@@ -16,25 +16,49 @@ function chiffreRomain(an) {
             romain=romain+"M";
             an=an-1000;
         }
+        else if(Math.floor(an/900)>0) {
+            romain=romain+"CM";
+            an=an-900;
+        }
         else if(Math.floor(an/500)>0) {
             romain=romain+"D";
             an=an-500;
+        }
+        else if(Math.floor(an/400)>0) {
+            romain=romain+"CD";
+            an=an-400;
         }
         else if(Math.floor(an/100)>0) {
             romain=romain+"C";
             an=an-100;
         }
+        else if(Math.floor(an/90)>0) {
+            romain=romain+"XC";
+            an=an-90;
+        }
         else if(Math.floor(an/50)>0) {
             romain=romain+"L";
             an=an-50;
+        }
+        else if(Math.floor(an/40)>0) {
+            romain=romain+"XL";
+            an=an-40;
         }
         else if(Math.floor(an/10)>0) {
             romain=romain+"X";
             an=an-10;
         }
+        else if(Math.floor(an/9)>0) {
+            romain=romain+"IX";
+            an=an-9;
+        }
         else if(Math.floor(an/5)>0) {
             romain=romain+"V";
             an=an-5;
+        }
+        else if(Math.floor(an/4)>0) {
+            romain=romain+"IV";
+            an=an-4;
         }
         else {
             romain=romain+"I";
