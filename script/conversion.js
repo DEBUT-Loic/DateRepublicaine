@@ -15,7 +15,7 @@ $("#input_date").keyup(function() {
         dC.getHours()<10 ? h="0"+dC.getHours() : h=dC.getHours();
         horaire=h+" h "+min+" : "+sec;
 
-        now=(date.getSeconds()+date.getMinutes()*60+date.getHours()*3600)*(1/0.864);
+        now=(dC.getSeconds()+dC.getMinutes()*60+dC.getHours()*3600)*(1/0.864);
         heure=Math.floor(now/(100*100)) % 10
         minute=Math.floor(now/100) % 100
         seconde=Math.floor(now) % 100
