@@ -1,0 +1,177 @@
+@import url('https://fonts.googleapis.com/css2?family=Luxurious+Roman&display=swap');
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+@font-face {
+    font-family: 'XVIIIe';
+    src: url('font/ShelleyAndanteBT.ttf') format('truetype');
+}
+@font-face {
+    font-family: 'attache';
+    src: url('font/Rochester.ttf') format('truetype');
+}
+@font-face {
+    font-family: 'canal';
+    src: url('font/Futura Bold.otf') format('truetype');
+}
+
+::selection {
+    background-color: black;
+    color: white;
+}
+
+html {
+    scroll-behavior: smooth;
+    overflow-y: hidden;
+}
+
+body {
+    font-family: 'Luxurious Roman', cursive;
+    font-size: 24px;
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+}
+section {
+    display: flex;
+    text-align: center;
+    justify-content: center;
+    width: 100%;
+}
+h1, h2, h3, h4, p, small {
+    margin: 0;
+}
+#republic {
+    width: 100%;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+#republic > p {
+    font-family: 'attache';
+}
+#republic > p:first-child {
+    font-size: clamp(0.7rem,3vw,2.5rem);
+}
+#republic > p:nth-child(2) {
+    font-size: clamp(2rem,7vw,8rem);
+}
+#republic > p:last-child {
+    font-size: clamp(0.9rem,4vw,3rem);
+}
+#gregorien {
+    left: 0;
+    right: 0;
+    margin: auto;
+    position: absolute;
+}
+#gregorien > h1 {
+    font-size: 2rem;
+}
+#gregorien > p {
+    font-style: italic;
+}
+#sect_conv, #sect_direct {
+    position: absolute;
+    margin-bottom: 25px;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+#button_conv, #button_direct {
+    font-style: italic;
+    font-family: 'Luxurious Roman';
+    border: none;
+    background-color: aqua;
+    font-size: 2rem;
+    padding: 5px;
+    border-radius: 7px;
+    cursor: pointer;
+    transition: 0.5s background-color, 0.5s letter-spacing;
+}
+#button_direct {
+    margin-bottom: 35px;
+}
+#button_conv:hover, #button_direct:hover {
+    background-color: aquamarine;
+    letter-spacing: 5px;
+    transition: all 0.5s;
+}
+input[type="datetime-local"] {
+    margin-top: 10px;
+    text-align: center;
+    background: none;
+    border: solid 2px black;
+    padding: 4px 12px 4px 12px;
+    border-radius: 5px;
+    font-family: 'Luxurious Roman';
+    font-weight: bolder;
+    font-size: 18px;
+}
+footer {
+    font-size: 1rem;
+    position: fixed;
+    left: 50%;
+    display: flex;
+    transform: translate(-50%, -50%);
+}
+footer > div {
+    display: flex;
+    justify-content: space-evenly;
+    width: 104px;
+    background: linear-gradient(to right, #03224c 58%, #fcddb3 50%);
+}
+footer > div > p {
+    font-family: 'canal';
+}
+footer > div > p:first-child {
+    color: #fcddb3;
+}
+footer > div > p:last-child {
+    color: #03224c;
+}
+@media all and (max-width: 1623px) {
+    .dateR, .dateC {
+        font-size: 7rem;
+    }
+}
+@media all and (max-width: 1420px) {
+    .dateR, .dateC {
+        font-size: 6rem;
+    }
+}
+@media all and (max-width: 1217px) {
+    .dateR, .dateC {
+        font-size: 5rem;
+    }
+}
+@media all and (max-width: 1014px) {
+    .dateR, .dateC {
+        font-size: 4rem;
+    }
+}
+@media all and (max-width: 811px) {
+    .dateR, .dateC {
+        font-size: 3rem;
+    }
+}
+@media all and (max-width: 610px) {
+    .dateR, .dateC {
+        font-size: 2.5rem;
+    }
+    .hR, .hC, .jourR, .jourC {
+        font-size: 1.5rem;
+    }
+    #gregorien > h1 {
+        font-size: 1.75rem;
+    }
+    #gregorien > p {
+        font-size: 1.25rem;
+    }
+}
