@@ -46,21 +46,8 @@ $(document).ready(() => {
         $("#gregorien h1 > span").text(`(an ${year(date)})`)
 
         // Mettre le fond parchemin
-        if(month(date) < 4) {
-            $('body').css('background-image','url("img/parchemin automne.png")');
-        }
-        else if(month(date) < 7) {
-            $('body').css('background-image','url("img/parchemin hiver.png")');
-        }
-        else if(month(date) < 10) {
-            $('body').css('background-image','url("img/parchemin printemps.png")');
-        }
-        else if(month(date) < 13) {
-            $('body').css('background-image','url("img/parchemin été.png")');
-        }
-        else {
-            $('body').css('background-image','url("img/parchemin.jpg")');
-        }
+        const season = ['automne', 'hiver', 'printemps', 'été', 'rien'][month(date) % 12 / 3 | 0];
+        $('body').css('background-image', `url("img/parchemin_${season}.png")`);
     }
     dateAffichage();
     setInterval(dateAffichage,1000);
