@@ -40,6 +40,7 @@ $(document).ready(() => {
         const pad = (n) => String(n).padStart(2, "0");
         const horDec=`${pad(heure)} h ${pad(minute)} : ${pad(seconde)}`;
 
+        $("#republic > .fete").text(firstLetterUC(dayOfYearName(date)));
         $("#republic > .date").text(dateRep);
         $("#republic > .heure").text(horDec);
         $("#gregorien h1 > span").text(`(an ${year(date)})`)
