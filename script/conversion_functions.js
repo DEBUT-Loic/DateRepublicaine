@@ -1,54 +1,62 @@
-$(document).ready(() => {
-    var date;
+function firstLetterUC(str) {
+    return str.charAt(0).toUpperCase() + str.slice(1);
+}
 
-    // Mettre la date grégorienne et républicaine
-    function dateAffichage() {
-        date = new Date();
+function halfYear(date) {
+    return date.getMonth() < 8 || (date.getMonth() === 8 && date.getDate() < 22);
+}
 
-        // GRÉGORIENNE
-        // Options pour la date en toutes lettres
-        const options = { weekday: "long", year: "numeric", month: "long", day: "2-digit" };
-        $("#gregorien > .date").text(firstLetterUC(date.toLocaleDateString('fr', options)));
-
-        // Formatage de l'heure avec padding
-        const h = String(date.getHours()).padStart(2, "0");
-        const min = String(date.getMinutes()).padStart(2, "0");
-        const sec = String(date.getSeconds()).padStart(2, "0");       
-        $("#gregorien > .heure").text(`${h} h ${min} : ${sec}`);
-
-        // --------------------------------------------------------------------------------------
-
-        // RÉPUBLICAINE
-        let dateRep;
-        switch (date.getTimezoneOffset()) {
-            case -60:
-                date.setHours(date.getHours()-1);
-                dateRep=`${firstLetterUC(dayOfDecadeName(date))} ${dayOfMonth(date)} ${firstLetterUC(monthName(date))} an ${convertToRomanNumeral(year(date))}`;
-                date.setHours(date.getHours()+1);
-                break;
-            
-            default:
-                dateRep=`${firstLetterUC(dayOfDecadeName(date))} ${dayOfMonth(date)} ${firstLetterUC(monthName(date))} an ${convertToRomanNumeral(year(date))}`;
-                break;
-        }
-
-        const tempsDecimal=(date.getSeconds()+date.getMinutes()*60+date.getHours()*3600) / 0.864;
-        const heure=Math.floor(tempsDecimal/10_000) % 10 // 1 heure = 100 secondes * 100 minutes
-        const minute=Math.floor(tempsDecimal/100) % 100 // 1 minute = 100 secondes
-        const seconde=Math.floor(tempsDecimal) % 100
-
-        const pad = (n) => String(n).padStart(2, "0");
-        const horDec=`${pad(heure)} h ${pad(minute)} : ${pad(seconde)}`;
-
-        $("#republic > .fete").text(firstLetterUC(dayOfYearName(date)));
-        $("#republic > .date").text(dateRep);
-        $("#republic > .heure").text(horDec);
-        $("#gregorien h1 > span").text(`(an ${year(date)})`)
-
-        // Mettre le fond parchemin
-        const season = ['automne', 'hiver', 'printemps', 'été', 'rien'][month(date) % 12 / 3 | 0];
-        $('body').css('background-image', `url("img/parchemin_${season}.png")`);
+function year(date) {
+    if (halfYear(date)) {
+        return date.getFullYear() - 1792;
     }
-    dateAffichage();
-    setInterval(dateAffichage,1000);
-})
+    return date.getFullYear() - 1791;
+}
+
+function convertToRomanNumeral(num) {
+    romanNumerals=jsonDate.romanNumerals
+    let result = "";
+    
+    for (const { value, symbol } of romanNumerals) {
+      	while (num >= value) {
+      	  	result += symbol;
+      	  	num -= value;
+      	}
+    }
+    
+    return result;
+}
+
+function getOneDayInMS() {
+	return 1000 * 60 * 60 * 24;
+}
+
+function dayOfYear(date) {
+    const currentYear = halfYear(date) ? date.getFullYear() - 1 : date.getFullYear(),
+        firstDayOfYear = new Date(currentYear, 8, 22);
+    return Math.floor((date - firstDayOfYear) / getOneDayInMS())+1;
+}
+
+function dayOfYearName(date) {
+    return jsonDate.name_days[dayOfYear(date) - 1];
+}
+
+function month(date) {
+    return Math.floor((dayOfYear(date) - 1) / 30) + 1;
+}
+
+function monthName(date) {
+    return jsonDate.months[month(date) - 1];
+}
+
+function dayOfMonth(date) {
+    return ((dayOfYear(date) - 1) - (month(date) - 1) * 30) + 1;
+}
+
+function dayOfDecade(date) {
+    return ((dayOfMonth(date) - 1) % 10) + 1;
+}
+
+function dayOfDecadeName(date) {
+    return jsonDate.days[dayOfDecade(date) - 1];
+}
