@@ -1,0 +1,16 @@
+@font-face {
+    font-family: 'XVIIIe';
+    src: url('font/ShelleyAndanteBT.ttf') format('truetype');
+}
+@font-face {
+    font-family: 'attache';
+    src: url('font/Rochester.ttf') format('truetype');
+}
+@font-face {
+    font-family: 'canal';
+    src: url('font/Futura Bold.otf') format('truetype');
+}
+@font-face {
+    font-family: 'Luxurious Roman';
+    src: url('font/LuxuriousRoman.ttf') format('truetype');
+}
