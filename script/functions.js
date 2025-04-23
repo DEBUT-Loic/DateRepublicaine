@@ -9,7 +9,7 @@ function displayDate() {
 
     // RÉPUBLICAINE
     let repDate = calculateRepDate(date);
-	refreshRepContent(date, repDate);
+	refreshRepContent(date, repDate, false);
 
     refreshBackground(date);
 }
@@ -29,11 +29,12 @@ function refreshGregContent(date) {
 }
 
 // Actualiser le contenu de la partie Républicaine de la page
-function refreshRepContent(date, repDate) {
-    $("#republic > .fete").text(firstLetterUC(dayOfYearName(date)));
-    $("#republic > .date").text(repDate);
-    $("#republic > .heure").text(formateHour(date, "rep"));
-    $("#gregorien h1 > span").text(`(an ${year(date)})`)
+function refreshRepContent(date, repDate, conv) {
+	let ajout=conv ? "Conv" : "";
+	$(`#republic${ajout} > .fete`).text(firstLetterUC(dayOfYearName(date)));
+	$(`#republic${ajout} > .date`).text(repDate);
+	$(`#republic${ajout} > .heure`).text(formateHour(date, "rep"));
+	$("#gregorien h1 > span").text(`(an ${year(date)})`);
 }
 
 function calculateRepDate(date) {
@@ -65,5 +66,28 @@ function formateHour(date, option) {
 		sec = Math.floor(decimalTime) % 100
 	}
 
-    return `${pad(h)} h ${pad(min)} : ${pad(sec)}`;
+    return `${option=="greg" ? pad(h) : h} h ${pad(min)} : ${pad(sec)}`;
+}
+
+// Scroll le main sans barre
+function scrollMain() {
+    $("nav a").css({background:"white", color:"black"});
+
+    // Parcourir les sections
+    $("main > section").each(function(index) {
+        // Vérifier si la section est au top de la fenêtre
+        if ($(this).offset().top === 0) {
+            // Mettre à jour le style du lien correspondant
+            $("nav a").eq(index).css({background:"black", color:"white"});
+        }
+    });
+}
+
+// Récupération de la date en tant réel
+function dateConversion() {
+	console.log($(this).val())
+	let dateConv=new Date($(this).val())
+	console.log(dateConv)
+
+	refreshRepContent(dateConv,calculateRepDate(dateConv),true);
 }
