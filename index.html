@@ -4,6 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- <link rel="shortcut icon" type="image/png" href="drapeau_icon.png"> -->
+    <link href="style/font.css" rel="stylesheet">
     <link href="style/style.css" rel="stylesheet">
     <script src="script/jquery_3.7.1.min.js"></script>
     <script src="script/index.js"></script>
@@ -27,7 +28,7 @@
                 <p class="date"> <!-- date --> dateGreg </p>
                 <p class="heure"> <!-- heure --> heureGreg</p>
             </div>
-            <div id="republic">
+            <div id="republic" class="republic">
                 <p class="fete"> <!-- fête du jour --> feteRep </p>
                 <p class="date"> <!-- date --> dateRep </p>
                 <p class="heure"> <!-- heure --> heureRep </p>
@@ -35,7 +36,16 @@
         </section>
     
         <section id="conversion">
-            <p>CONVERSION EN P</p>
+            <div>
+                <label for="dateConv">Saisir une date : </label>
+                <input type="datetime-local" name="dateConv" id="dateConv">
+            </div>
+
+            <div id="republicConv" class="republic">
+                <p class="fete"> <!-- fête du jour --> feteRep </p>
+                <p class="date"> <!-- date --> dateRep </p>
+                <p class="heure"> <!-- heure --> heureRep </p>
+            </div>            
         </section>
     
         <section id="calendrier">
