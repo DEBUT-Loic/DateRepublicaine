@@ -15,7 +15,7 @@
 <body>
     <aside>
         <nav>
-            <a href="#direct">En Direct</a>
+            <a href="#direct" class="selected">En Direct</a>
             <a href="#conversion">Conversion</a>
             <a href="#calendrier">Calendrier</a>
         </nav>
@@ -36,15 +36,16 @@
         </section>
     
         <section id="conversion">
-            <div>
+            <div id="formConv">
                 <label for="dateConv">Saisir une date : </label>
-                <input type="datetime-local" name="dateConv" id="dateConv">
+                <input type="date" name="dateConv" id="dateConv" oninput="dateConversion($(this).val())" onchange="dateConversion($(this).val())">
+                <input type="time" name="hourConv" id="hourConv" value="10:10" oninput="hourConversion($(this).val())" onchange="hourConversion($(this).val())">
             </div>
 
             <div id="republicConv" class="republic">
-                <p class="fete"> <!-- fête du jour --> feteRep </p>
-                <p class="date"> <!-- date --> dateRep </p>
-                <p class="heure"> <!-- heure --> heureRep </p>
+                <p class="fete"> <!-- fête du jour --> </p>
+                <p class="date"> <!-- date --> </p>
+                <p class="heure"> <!-- heure --> </p>
             </div>            
         </section>
     
