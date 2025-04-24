@@ -33,7 +33,7 @@ function refreshRepContent(date, repDate, conv) {
 	let ajout=conv ? "Conv" : "";
 	$(`#republic${ajout} > .fete`).text(firstLetterUC(dayOfYearName(date)));
 	$(`#republic${ajout} > .date`).text(repDate);
-	$(`#republic${ajout} > .heure`).text(formateHour(date, "rep"));
+	if(ajout) $(`#republic > .heure`).text(formateHour(date, "rep"));
 	$("#gregorien h1 > span").text(`(an ${year(date)})`);
 }
 
@@ -66,28 +66,37 @@ function formateHour(date, option) {
 		sec = Math.floor(decimalTime) % 100
 	}
 
-    return `${option=="greg" ? pad(h) : h} h ${pad(min)} : ${pad(sec)}`;
+    return `${option==="greg" ? pad(h) : h} h ${pad(min)} : ${pad(sec)}`;
 }
 
 // Scroll le main sans barre
 function scrollMain() {
-    $("nav a").css({background:"white", color:"black"});
+    $("nav a").removeClass("selected");
 
-    // Parcourir les sections
     $("main > section").each(function(index) {
-        // Vérifier si la section est au top de la fenêtre
-        if ($(this).offset().top === 0) {
-            // Mettre à jour le style du lien correspondant
-            $("nav a").eq(index).css({background:"black", color:"white"});
+        if($(this).offset().top === 0) {
+            $("nav a").eq(index).addClass("selected");
         }
     });
 }
 
 // Récupération de la date en tant réel
-function dateConversion() {
-	console.log($(this).val())
-	let dateConv=new Date($(this).val())
-	console.log(dateConv)
+function dateConversion(dateVar) {
+	if(dateVar) {
+		const dateConv=new Date(dateVar)
+		refreshRepContent(dateConv,calculateRepDate(dateConv),true);
+	}
+}
 
-	refreshRepContent(dateConv,calculateRepDate(dateConv),true);
+// Récupération de l'heure en tant réel
+function hourConversion(hourVar="10:10") {
+	if(hourVar) {
+		console.log(hourVar)
+		const [h,m] = hourVar.split(":").map(Number) // 10:30 => [10,30]
+		const hourConv=new Date();
+		hourConv.setHours(h,m);
+		console.log(hourConv)
+
+		$(`#republicConv > .heure`).text(formateHour(hourConv, "rep"));
+	}
 }
