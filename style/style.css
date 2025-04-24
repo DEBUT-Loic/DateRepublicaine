@@ -61,9 +61,13 @@ nav a {
     align-items: center;
     transition: background 0.5s, color 0.5s;
 }
-nav a:first-child, nav a:hover {
+a.selected {
     background: black;
     color: white;
+}
+
+nav a:hover {
+    background: #7f7f7f;
 }
 
 /* main */
@@ -105,7 +109,7 @@ section {
 .republic > p:last-child {
     font-size: clamp(0.9rem,4vw,3rem);
 }
-#gregorien {
+#gregorien, #formConv {
     left: 0;
     right: 0;
     margin: auto;
@@ -117,7 +121,7 @@ section {
 #gregorien > p {
     font-style: italic;
 }
-input[type="datetime-local"] {
+input[type="date"],input[type="time"] {
     margin-top: 10px;
     text-align: center;
     background: none;
