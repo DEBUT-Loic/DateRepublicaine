@@ -13,10 +13,9 @@ $(document).ready(() => {
     displayDate() || setInterval(displayDate, 1000);
 
     $("nav a").click(function() {
-        $("nav a").css({background:"white",color:"black"});
-        $(this).css({background:"black",color:"white"});
+        $("nav a").removeClass("selected");
+        $(this).addClass("selected");
     })
 
     $("main").scroll(scrollMain);
-    $("#dateConv").on("input", dateConversion);
 })
