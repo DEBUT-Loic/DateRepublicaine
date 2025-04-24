@@ -84,7 +84,7 @@ function scrollMain() {
 function dateConversion(dateVar) {
 	if(dateVar) {
 		const dateConv=new Date(dateVar)
-		refreshRepContent(dateConv,calculateRepDate(dateConv),true);
+		if(dateConv >= new Date("0101-01-01"))refreshRepContent(dateConv,calculateRepDate(dateConv),true);
 	}
 }
 
