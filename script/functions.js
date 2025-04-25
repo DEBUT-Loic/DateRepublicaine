@@ -33,7 +33,7 @@ function refreshRepContent(date, repDate, conv) {
 	let ajout=conv ? "Conv" : "";
 	$(`#republic${ajout} > .fete`).text(firstLetterUC(dayOfYearName(date)));
 	$(`#republic${ajout} > .date`).text(repDate);
-	if(ajout) $(`#republic > .heure`).text(formateHour(date, "rep"));
+	if(!ajout) $(`#republic > .heure`).text(formateHour(date, "rep"));
 	$("#gregorien h1 > span").text(`(an ${year(date)})`);
 }
 
