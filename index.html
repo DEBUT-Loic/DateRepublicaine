@@ -38,7 +38,7 @@
         <section id="conversion">
             <div id="formConv">
                 <label for="dateConv">Saisir une date : </label>
-                <input type="date" name="dateConv" id="dateConv" oninput="dateConversion($(this).val())" onchange="dateConversion($(this).val())">
+                <input type="date" name="dateConv" id="dateConv" min="1000-01-01" max="9999-12-31" oninput="dateConversion($(this).val())" onchange="dateConversion($(this).val())">
                 <input type="time" name="hourConv" id="hourConv" value="10:10" oninput="hourConversion($(this).val())" onchange="hourConversion($(this).val())">
             </div>
 
@@ -50,8 +50,15 @@
         </section>
     
         <section id="calendrier">
-            <p>CALENDRIER EN P</p>
+            <noscript>
+                <p>Pour voir le calendrier, rallume le JavaScript !</p>
+            </noscript>
+
+            <div>
+                
+            </div>
         </section>
+        
     </main>
 </body>
 </html>
