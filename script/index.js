@@ -18,4 +18,6 @@ $(document).ready(() => {
     })
 
     $("main").scroll(scrollMain);
+
+    calendar();
 })

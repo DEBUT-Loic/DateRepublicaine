@@ -100,3 +100,43 @@ function hourConversion(hourVar="10:10") {
 		$(`#republicConv > .heure`).text(formateHour(hourConv, "rep"));
 	}
 }
+
+function calendar() {
+	const calendDisplay = $("#calendrier > div");
+	let daysHTML="";
+	for(let i=0;i<jsonDate.days.length;i++) {
+		daysHTML+="<th>"+firstLetterUC(jsonDate.days[i])+"</th>";
+	}
+
+	let numDaysHTML="";
+	for(let i=1;i<=30;i++) {
+		numDaysHTML+="<th>"+i+"</th>";
+		if(i%10==0 && i!=30) {
+			numDaysHTML+="</tr> <tr>";
+		}
+	}
+
+	let displayConst = "";
+	for(let i=0;i<jsonDate.months.length;i++) {
+		displayConst=`<table>
+						<thead>
+							<tr>
+                            	<th scope="col" colspan="10"> ${firstLetterUC(jsonDate.months[i])} </th>
+                        	</tr>
+                    	</thead>
+						<tbody>
+							<tr>
+								${daysHTML}
+							</tr>
+
+							<tr>
+								${numDaysHTML}
+							</tr>
+						</tbody>
+					</table>
+					`
+
+
+		calendDisplay.append(displayConst);
+	}
+}
