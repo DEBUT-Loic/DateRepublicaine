@@ -190,6 +190,14 @@ function calendar() {
 		$("#suivant").css("display", newX === -3 ? "none" : "block");
 		$("#precedent").css("display", "block"); // pour réactiver
 	});
+
+	$("#calendrier article table").each(function(index,elem) {
+		const date = new Date;
+		
+		if($(elem).data("mois") == monthName(date)) {
+			$(elem).find("td").eq(dayOfMonth(date) - 1).addClass("actuel")
+		}
+	}) 
 }
 
 function isBissextile() {
