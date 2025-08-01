@@ -121,6 +121,8 @@ section {
 #gregorien > p {
     font-style: italic;
 }
+
+/* conversion */
 input[type="date"],input[type="time"] {
     margin-top: 10px;
     text-align: center;
@@ -132,28 +134,142 @@ input[type="date"],input[type="time"] {
     font-weight: bolder;
     font-size: 18px;
 }
-footer {
+
+/* calendrier */
+section#calendrier {
+    width: 400vw;
+}
+
+section#calendrier > div:first-of-type {
+    display: flex;
+    position: relative;
+    width: 100%;
+    transition: transform 0.5s;
+}
+
+section#calendrier div > article {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 40px;
+    margin-top: 30px;
+}
+
+
+section#calendrier table, section#calendrier table * {
+    border: 1px black solid;
+}
+
+section#calendrier table {
+    border-collapse: collapse;
+    box-shadow: 0 0 10px black;
+}
+section#calendrier table tr:first-child th {
+    width: 70px;
+}
+
+section#calendrier table th {
     font-size: 1rem;
-    position: fixed;
-    left: 50%;
+    padding: 5px 0;
+}
+section#calendrier table thead th {
+    font-size: 1.2rem;
+}
+
+/* Automne */
+#automne thead th {
+    background-color: #d57121;
+    color: white;
+}
+#automne tbody th {
+    background-color: #e9a44e;
+}
+#automne td {
+    background-color: #f6ddb2;
+}
+
+/* Hiver */
+#hiver thead th {
+    background-color: #6897c9;
+    color: white;
+}
+#hiver tbody th {
+    background-color: #a6c8e1;
+}
+#hiver td {
+    background-color: #cee0ef;
+}
+
+/* Printemps */
+#printemps thead th {
+    background-color: #499e4a;
+    color: white;
+}
+#printemps tbody th {
+    background-color: #9fd6a0;
+}
+#printemps td {
+    background-color: #bee4be;
+}
+
+/* Été */
+section#calendrier div > #ete {
+    gap: 100px;
+    margin-top: 0;
+    margin-right: 100px;
+    flex-direction: row;
+    justify-content: flex-end;
+}
+section#calendrier #ete > div:first-of-type {
+    height: 100%;
     display: flex;
-    transform: translate(-50%, -50%);
+    flex-direction: column;
+    gap: 40px;
+    margin-top: 60px;
 }
-footer > div {
-    display: flex;
-    justify-content: space-evenly;
-    width: 104px;
-    background: linear-gradient(to right, #03224c 58%, #fcddb3 50%);
+
+#ete thead th {
+    background-color: #fdc412;
 }
-footer > div > p {
-    font-family: 'canal';
+#ete tbody th {
+    background-color: #ffec89;
 }
-footer > div > p:first-child {
-    color: #fcddb3;
+#ete td {
+    background-color: #fff7c2;
 }
-footer > div > p:last-child {
-    color: #03224c;
+
+
+
+#precedent, #suivant {
+    width: 100px;
+    height: 100px;
+    position: absolute;
+    background-color: black;
+    transition: transform 0.5s, background 0.5s;
 }
+#precedent:hover, #suivant:hover {
+    transform: translateY(-50%) scale(1.25);
+    background: gray;
+}
+
+#precedent {
+    clip-path: polygon(0 50%, 100% 0, 100% 100%, 0 50%);
+    left: 50px;
+    top: 50%;
+    transform: translateY(-50%);
+    transform-origin: left;
+    display: none;
+}
+#suivant {
+    clip-path: polygon(0 0, 100% 50%, 0 100%, 0 0);
+    left: calc(25% - 150px);
+    top: 50%;
+    transform: translateY(-50%);
+    transform-origin: right;
+}
+
 @media all and (max-width: 1623px) {
     .dateR, .dateC {
         font-size: 7rem;

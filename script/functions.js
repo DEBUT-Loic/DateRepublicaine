@@ -15,7 +15,7 @@ function displayDate() {
 }
 
 function refreshBackground(date) {
-	const season = ["automne", "hiver", "printemps", "été", "rien"][month(date) % 12 / 3 | 0];
+	const season = ["automne", "hiver", "printemps", "ete", "rien"][month(date) % 12 / 3 | 0];
     $("body").css("background-image", `url("img/parchemin_${season}.png")`);
 }
 
@@ -103,40 +103,98 @@ function hourConversion(hourVar="10:10") {
 
 function calendar() {
 	const calendDisplay = $("#calendrier > div");
-	let daysHTML="";
-	for(let i=0;i<jsonDate.days.length;i++) {
-		daysHTML+="<th>"+firstLetterUC(jsonDate.days[i])+"</th>";
-	}
+	let sanculotides;
+	let newX = 0;
 
-	let numDaysHTML="";
-	for(let i=1;i<=30;i++) {
-		numDaysHTML+="<th>"+i+"</th>";
-		if(i%10==0 && i!=30) {
-			numDaysHTML+="</tr> <tr>";
+	for (let i = 0; i < jsonDate.months.length; i++) {
+		let daysHTML = "";
+		let numDaysHTML = "";
+
+		if (i === 12) {
+			sanculotides = true;
+			// Pour le 13e mois, n'afficher que les 5 premiers jours
+			const sanculotidesDays = jsonDate.days.slice(0, 5);
+			for (let d = 0; d < sanculotidesDays.length; d++) {
+				daysHTML += "<th>" + firstLetterUC(sanculotidesDays[d]) + "</th>";
+			}
+			let daysInMonth = isBissextile() ? 6 : 5;
+
+			for (let j = 1; j <= daysInMonth; j++) {
+				numDaysHTML += "<td>" + j + "</td>";
+			}
+		} else {
+			sanculotides = false;
+			// Pour les 12 premiers mois, afficher tous les jours
+			for (let d = 0; d < jsonDate.days.length; d++) {
+				daysHTML += "<th>" + firstLetterUC(jsonDate.days[d]) + "</th>";
+			}
+
+			for (let j = 1; j <= 30; j++) {
+				numDaysHTML += "<td>" + j + "</td>";
+
+				if (j % 10 === 0 && j !== 30) {
+					numDaysHTML += "</tr><tr>";
+				}
+			}
+		}
+
+		let displayConst = `
+			<table data-mois="${jsonDate.months[i]}">
+				<thead>
+					<tr>
+						<th scope="col" colspan="10">${firstLetterUC(jsonDate.months[i])}</th>
+					</tr>
+				</thead>
+
+				<tbody>
+					<tr>
+						${daysHTML}
+					</tr>
+					<tr>
+						${numDaysHTML}
+					</tr>
+				</tbody>
+			</table>
+		`;
+
+		if(i < 3) {
+			$("#automne").append(displayConst);
+		}
+		else if(i < 6) {
+			$("#hiver").append(displayConst);
+		}
+		else if(i < 9) {
+			$("#printemps").append(displayConst);
+		}
+		else {
+			i < 12 ? $("#ete > div:first-of-type").append(displayConst) : $("#ete > div:last-of-type").append(displayConst);
 		}
 	}
 
-	let displayConst = "";
-	for(let i=0;i<jsonDate.months.length;i++) {
-		displayConst=`<table>
-						<thead>
-							<tr>
-                            	<th scope="col" colspan="10"> ${firstLetterUC(jsonDate.months[i])} </th>
-                        	</tr>
-                    	</thead>
-						<tbody>
-							<tr>
-								${daysHTML}
-							</tr>
+	$("#precedent").click(function () {
+		newX++;
+		$("#calendrier > div:first-of-type").css({
+			transform: `translateX(${newX * 25}%)`
+		});
 
-							<tr>
-								${numDaysHTML}
-							</tr>
-						</tbody>
-					</table>
-					`
+		$("#precedent").css("display", newX === 0 ? "none" : "block");
+		$("#suivant").css("display", "block"); // au cas où tu veux revenir
+	});
 
+	$("#suivant").click(function () {
+		newX--;
+		$("#calendrier > div:first-of-type").css({
+			transform: `translateX(${newX * 25}%)`
+		});
 
-		calendDisplay.append(displayConst);
-	}
+		$("#suivant").css("display", newX === -3 ? "none" : "block");
+		$("#precedent").css("display", "block"); // pour réactiver
+	});
+}
+
+function isBissextile() {
+	let date = new Date();
+	let lastDateRep = new Date(`${date.getFullYear()}-09-21`);
+	let yearVerif = date<=lastDateRep ? date.getFullYear() : date.getFullYear()+1;
+	return (yearVerif % 4 === 0 && (yearVerif % 100 !== 0 || yearVerif % 400 === 0));
 }
