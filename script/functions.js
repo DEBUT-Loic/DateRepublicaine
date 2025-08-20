@@ -15,7 +15,10 @@ function displayDate() {
 }
 
 function refreshBackground(date) {
-	const season = ["automne", "hiver", "printemps", "ete", "rien"][month(date) % 12 / 3 | 0];
+	const m = month(date);
+	const season = (m > 12) 
+		? "rien" 
+		: ["automne", "hiver", "printemps", "ete"][(m - 1) / 3 | 0];
     $("body").css("background-image", `url("img/parchemin_${season}.png")`);
 }
 
@@ -83,28 +86,80 @@ function scrollMain() {
 // Récupération de la date en tant réel
 function dateConversion(dateVar) {
 	if(dateVar) {
-		const dateConv=new Date(dateVar)
-		if(dateConv >= new Date("0101-01-01"))refreshRepContent(dateConv,calculateRepDate(dateConv),true);
+		const dateConv=new Date(dateVar);
+		if(dateConv >= new Date("0101-01-01")) refreshRepContent(dateConv,calculateRepDate(dateConv),true);
 	}
 }
 
 // Récupération de l'heure en tant réel
 function hourConversion(hourVar="10:10") {
 	if(hourVar) {
-		console.log(hourVar)
 		const [h,m] = hourVar.split(":").map(Number) // 10:30 => [10,30]
 		const hourConv=new Date();
 		hourConv.setHours(h,m);
-		console.log(hourConv)
 
 		$(`#republicConv > .heure`).text(formateHour(hourConv, "rep"));
 	}
 }
 
 function calendar() {
-	const calendDisplay = $("#calendrier > div");
-	let sanculotides;
-	let newX = 0;
+	const date = new Date;
+
+	let sanculotides, year, yearEaster, newX = -(month(date) - 1) / 3 | 0;
+	
+	$("#calendrier > div:first-of-type").css({
+		transform: `translateX(${newX * 100}%)`
+	});
+
+	if(newX == -3) {
+		$("#suivant").css("display","none");
+		$("#precedent").css("display","block");
+	}
+	
+	let lastDateRep = new Date(`${date.getFullYear()}-09-21`);
+	yearEaster = date > lastDateRep ? date.getFullYear()+1 : date.getFullYear()
+	const dateEaster = new Date(`${yearEaster}-${dateOfEaster(yearEaster)}`);
+	const tabDateEvent = ["01-01","05-01","05-08","07-14","08-15","11-01","11-11","12-25"];
+	const tabEvent = ["Jour de l'An","Pâques","Lundi de Pâques","Fête du Travail","Victoire 1945","Ascension","Pentecôte","Lundi de Pentecôte","Fête nationale","Assomption","Toussaint","Armistice 1918","Noël"]
+
+	tabDateEvent.push(dateOfEaster(yearEaster));
+
+	// Lundi de Pâques
+	let lundiPaques = new Date(dateEaster);
+	lundiPaques.setDate(dateEaster.getDate() + 1);
+	let lundiPaquesMois = parseInt(lundiPaques.getMonth()+1);
+	tabDateEvent.push(`${lundiPaquesMois < 10 ? "0"+lundiPaquesMois : lundiPaquesMois}-${lundiPaques.getDate() < 10 ? "0"+lundiPaques.getDate() : lundiPaques.getDate()}`);
+
+	// Jeudi de l'Ascension
+	let jeudiAscension = new Date(dateEaster);
+	jeudiAscension.setDate(dateEaster.getDate() + 39);
+	let jeudiAscensionMois = parseInt(jeudiAscension.getMonth()+1);
+	tabDateEvent.push(`${jeudiAscensionMois < 10 ? "0"+jeudiAscensionMois : jeudiAscensionMois}-${jeudiAscension.getDate() < 10 ? "0"+jeudiAscension.getDate() : jeudiAscension.getDate()}`);
+
+	// Lundi de Pentecôte
+	let lundiPentecote = new Date(dateEaster);
+	lundiPentecote.setDate(dateEaster.getDate() + 50);
+	let lundiPentecoteMois = parseInt(lundiPentecote.getMonth()+1);
+	tabDateEvent.push(`${lundiPentecoteMois < 10 ? "0"+lundiPentecoteMois : lundiPentecoteMois}-${lundiPentecote.getDate() < 10 ? "0"+lundiPentecote.getDate() : lundiPentecote.getDate()}`);
+	
+	// Pentecôte
+	let pentecote = new Date(lundiPentecote);
+	pentecote.setDate(lundiPentecote.getDate() - 1);
+	let pentecoteMois = parseInt(pentecote.getMonth()+1);
+	tabDateEvent.push(`${pentecoteMois < 10 ? "0"+pentecoteMois : pentecoteMois}-${pentecote.getDate() < 10 ? "0"+pentecote.getDate() : pentecote.getDate()}`);
+
+	tabDateEvent.sort((a, b) => {
+		let [ma, da] = a.split('-').map(Number);
+		let [mb, db] = b.split('-').map(Number);
+		return ma - mb || da - db;
+	});
+
+	if(date < lastDateRep) {
+		year = date.getFullYear();
+	}
+	else {
+		year = date.getFullYear() + 1;
+	}
 
 	for (let i = 0; i < jsonDate.months.length; i++) {
 		let daysHTML = "";
@@ -113,7 +168,7 @@ function calendar() {
 		if (i === 12) {
 			sanculotides = true;
 			// Pour le 13e mois, n'afficher que les 5 premiers jours
-			const sanculotidesDays = jsonDate.days.slice(0, 5);
+			const sanculotidesDays = isBissextile() ? jsonDate.days.slice(0, 6) : jsonDate.days.slice(0, 5);
 			for (let d = 0; d < sanculotidesDays.length; d++) {
 				daysHTML += "<th>" + firstLetterUC(sanculotidesDays[d]) + "</th>";
 			}
@@ -171,29 +226,48 @@ function calendar() {
 		}
 	}
 
-	$("#precedent").click(function () {
+	$("#precedent").click(function() {
 		newX++;
 		$("#calendrier > div:first-of-type").css({
-			transform: `translateX(${newX * 25}%)`
+			transform: `translateX(${newX * 100}%)`
 		});
 
 		$("#precedent").css("display", newX === 0 ? "none" : "block");
 		$("#suivant").css("display", "block"); // au cas où tu veux revenir
 	});
 
-	$("#suivant").click(function () {
+	$("#suivant").click(function() {
 		newX--;
 		$("#calendrier > div:first-of-type").css({
-			transform: `translateX(${newX * 25}%)`
+			transform: `translateX(${newX * 100}%)`
 		});
 
 		$("#suivant").css("display", newX === -3 ? "none" : "block");
 		$("#precedent").css("display", "block"); // pour réactiver
 	});
 
+	$.each(tabDateEvent, function(index,elem) {
+		let dateEvent = new Date(`${year}-${elem}`);
+
+		if(dateEvent > lastDateRep) {
+			dateEvent.setFullYear(dateEvent.getFullYear() + 1);
+		}
+
+		let tempTdVal = $("#calendrier article td").eq(dayOfYear(dateEvent) - 1).text();
+
+		$("#calendrier article td").eq(dayOfYear(dateEvent) - 1).text("").addClass("evenement").append(`
+				<div class="flip-inner">
+					<div class="flip-front">${tempTdVal}</div>  <!-- recto : date -->
+					<div class="flip-back">${tabEvent[index]}</div> <!-- verso : événement -->
+				</div>
+			`);
+	})
+	
+	for(let i=0;i < (dayOfYear(date) - 1);i++) {
+		$("#calendrier article td").eq(i).addClass("passe");
+	}
+
 	$("#calendrier article table").each(function(index,elem) {
-		const date = new Date;
-		
 		if($(elem).data("mois") == monthName(date)) {
 			$(elem).find("td").eq(dayOfMonth(date) - 1).addClass("actuel")
 		}
