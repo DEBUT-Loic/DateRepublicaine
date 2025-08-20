@@ -137,6 +137,27 @@ input[type="date"],input[type="time"] {
 
 /* calendrier */
 section#calendrier {
+    overflow: hidden; /* cache ce qui déborde */
+    width: 100%; /* juste la largeur écran */
+}
+
+section#calendrier > div:first-of-type {
+    display: flex;
+    width: 400%; /* 4 articles = 400% */
+    transition: transform 0.5s ease;
+}
+
+section#calendrier div > article {
+    flex: 0 0 100%; /* chaque article = 100% de la largeur de la section */
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 40px;
+    margin-top: 30px;
+}
+
+/* section#calendrier {
     width: 400vw;
 }
 
@@ -155,7 +176,7 @@ section#calendrier div > article {
     align-items: center;
     gap: 40px;
     margin-top: 30px;
-}
+} */
 
 
 section#calendrier table, section#calendrier table * {
@@ -220,14 +241,15 @@ section#calendrier div > #ete {
     margin-top: 0;
     margin-right: 100px;
     flex-direction: row;
-    justify-content: flex-end;
+    justify-content: center;
+    flex-wrap: wrap;
 }
 section#calendrier #ete > div:first-of-type {
     height: 100%;
     display: flex;
     flex-direction: column;
     gap: 40px;
-    margin-top: 60px;
+    margin-top: 30px;
 }
 
 #ete thead th {
@@ -264,11 +286,92 @@ section#calendrier #ete > div:first-of-type {
 }
 #suivant {
     clip-path: polygon(0 0, 100% 50%, 0 100%, 0 0);
-    left: calc(25% - 150px);
+    right: 50px;
     top: 50%;
     transform: translateY(-50%);
     transform-origin: right;
 }
+
+#calendrier article .passe {
+    background-color: #e0e0e0;
+    color: #888;
+}
+#calendrier article .actuel {
+    background-color: #000;   /* noir */
+    color: #fff;              /* texte blanc */
+    font-weight: bold;
+    box-shadow: inset 2px 2px 4px gold,
+                inset -2px -2px 4px gold;
+}
+
+#calendrier article  td.evenement.passe {
+    color: black;
+    filter: contrast(0.2);
+}
+#automne td.evenement {
+    background-color: #ff8a4b; /* nuance automne + événement */
+}
+
+#hiver td.evenement {
+    background-color: #4a90e2; /* nuance hiver + événement */
+}
+
+#printemps td.evenement {
+    background-color: #66c966; /* nuance printemps + événement */
+}
+
+#ete td.evenement {
+    background-color: #ffd633; /* nuance été + événement */
+}
+
+section#calendrier td.evenement * {
+    border: none;
+}
+section#calendrier td.evenement {
+    transition: 0.5s transform;
+}
+section#calendrier td.evenement:hover .flip-inner {
+    transform: rotateY(180deg);
+}
+
+section#calendrier .flip {
+    perspective: 1000px; /* profondeur 3D */
+    width: 50px;  /* à adapter à la taille de ta case */
+    height: 50px;
+    padding: 0;
+    margin: 0;
+}
+
+section#calendrier .flip-inner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    transition: transform 0.6s;
+    transform-style: preserve-3d;
+}
+
+section#calendrier .flip:hover .flip-inner {
+    transform: rotateY(180deg); /* effet flip */
+}
+
+section#calendrier .flip-front, section#calendrier .flip-back {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden; /* cache l’autre face */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid #444; /* bordure optionnelle */
+    font-weight: bold;
+}
+
+section#calendrier .flip-back {
+    transform: rotateY(180deg);
+    font-size: small;
+}
+
 
 @media all and (max-width: 1623px) {
     .dateR, .dateC {
