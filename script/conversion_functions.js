@@ -86,16 +86,124 @@ function dateOfEaster(year) {
     return `${month < 10 ? "0"+month : month}-${day}`;
 }
 
+function fromJulian(jd) {
+    const dateTemp = new Date((jd - 2440587.5) * 86400 * 1000);
+    dateTemp.setHours(0,0,0);
+    return dateTemp;
+}
+
+// Équinoxe de printemps (mars)
+function springEquinox(year) {
+    const Y = (year - 2000) / 1000;
+    const JDE0 =
+        2451623.80984 +
+        365242.37404 * Y +
+        0.05169 * Y * Y -
+        0.00411 * Y * Y * Y -
+        0.00057 * Y * Y * Y * Y;
+
+    return fromJulian(JDE0);
+}
+
+// Solstice d'été (juin)
+function summerSolstice(year) {
+    const Y = (year - 2000) / 1000;
+    const JDE0 =
+        2451716.56767 +
+        365241.62603 * Y +
+        0.00325 * Y * Y +
+        0.00888 * Y * Y * Y -
+        0.00030 * Y * Y * Y * Y;
+
+    return fromJulian(JDE0);
+}
+
 function autumnEquinox(year) {
     const Y = (year - 2000) / 1000;
-    const JDE0 = 2451810.217 + 365242.01767 * Y - 0.11575 * Y * Y + 0.00337 * Y * Y * Y + 0.00078 * Y * Y * Y * Y;
-
-    function fromJulian(jd) {
-        return new Date((jd - 2440587.5) * 86400 * 1000);
-    }
-
-    const dateUTC = fromJulian(JDE0);
+    const JDE0 =
+        2451810.217 +
+        365242.01767 * Y -
+        0.11575 * Y * Y +
+        0.00337 * Y * Y * Y +
+        0.00078 * Y * Y * Y * Y;
 
     // Retourner les composantes UTC
-    return dateUTC;
+    return fromJulian(JDE0);
 }
+
+// Solstice d'hiver (décembre)
+function winterSolstice(year) {
+    const Y = (year - 2000) / 1000;
+    const JDE0 =
+        2451900.05952 +
+        365242.74049 * Y -
+        0.06223 * Y * Y -
+        0.00823 * Y * Y * Y +
+        0.00032 * Y * Y * Y * Y;
+
+    return fromJulian(JDE0);
+}
+
+console.log(springEquinox(2025));
+console.log(summerSolstice(2025));
+console.log(autumnEquinox(2025));
+console.log(winterSolstice(2025));
+
+let printempsEte = (summerSolstice(2025) - springEquinox(2025)) / getOneDayInMS();
+let eteAutomne = (autumnEquinox(2025) - summerSolstice(2025)) / getOneDayInMS();
+let automneHiver = (winterSolstice(2025) - autumnEquinox(2025)) / getOneDayInMS();
+let hiverPrintemps = (springEquinox(2026) - winterSolstice(2025)) / getOneDayInMS()
+
+console.log(printempsEte);
+console.log(eteAutomne)
+console.log(automneHiver);
+console.log(hiverPrintemps);
+
+console.log(printempsEte + eteAutomne + automneHiver + hiverPrintemps);
+
+console.log("----------------------------------------------");
+
+printempsEte = (summerSolstice(2024) - springEquinox(2024)) / getOneDayInMS();
+eteAutomne = (autumnEquinox(2024) - summerSolstice(2024)) / getOneDayInMS();
+automneHiver = (winterSolstice(2024) - autumnEquinox(2024)) / getOneDayInMS();
+hiverPrintemps = (springEquinox(2025) - winterSolstice(2024)) / getOneDayInMS()
+
+console.log(printempsEte);
+console.log(eteAutomne)
+console.log(automneHiver);
+console.log(hiverPrintemps);
+
+console.log(printempsEte + eteAutomne + automneHiver + hiverPrintemps);
+
+console.log("----------------------------------------------");
+
+printempsEte = (summerSolstice(2023) - springEquinox(2023)) / getOneDayInMS();
+eteAutomne = (autumnEquinox(2023) - summerSolstice(2023)) / getOneDayInMS();
+automneHiver = (winterSolstice(2023) - autumnEquinox(2023)) / getOneDayInMS();
+hiverPrintemps = (springEquinox(2024) - winterSolstice(2023)) / getOneDayInMS()
+
+console.log(printempsEte);
+console.log(eteAutomne)
+console.log(automneHiver);
+console.log(hiverPrintemps);
+
+console.log(printempsEte + eteAutomne + automneHiver + hiverPrintemps);
+
+console.log("----------------------------------------------");
+
+printempsEte = (summerSolstice(2022) - springEquinox(2022)) / getOneDayInMS();
+eteAutomne = (autumnEquinox(2022) - summerSolstice(2022)) / getOneDayInMS();
+automneHiver = (winterSolstice(2022) - autumnEquinox(2022)) / getOneDayInMS();
+hiverPrintemps = (springEquinox(2023) - winterSolstice(2022)) / getOneDayInMS()
+
+console.log(printempsEte);
+console.log(eteAutomne)
+console.log(automneHiver);
+console.log(hiverPrintemps);
+
+console.log(printempsEte + eteAutomne + automneHiver + hiverPrintemps);
+
+// Printemps : Germination, Croissance, Fleur, etc.
+// Été : Soleil, Chaleur, Feu, etc.
+// Automne : Vent, Feuille, Récolte, etc.
+// Hiver : Neige, Froid, Nuit, etc.
