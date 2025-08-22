@@ -13,3 +13,13 @@
 10 : Hibernaire
 11 : Albinal
 12 : Ultigel
+
+-------------------------
+
+1 : Aurodi
+2 : Lumidi
+3 : Solidi
+4 : Zenidi
+5 : Déclinidi	?
+6 : Vespridi	?
+7 : Noctidi
