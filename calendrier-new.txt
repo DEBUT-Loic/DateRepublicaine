@@ -1,15 +1,15 @@
-1 : Auroravire
+1 : Vernaire
 2 : Viridal
-3 :
+3 : Primocal
 -------------------------
-4 : Zenigal
+4 : Estaire
 5 : Galbinal
-6 :
+6 : Ultical
 -------------------------
-7 :
+7 : Automnaire
 8 : Aurantal
-9 :
+9 : Primogel
 -------------------------
-10 :
+10 : Hibernaire
 11 : Albinal
-12 :
+12 : Ultigel
