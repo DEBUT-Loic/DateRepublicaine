@@ -1,0 +1,22 @@
+1 : 21 mars - 19 avril          ANFAMBRE
+2 : 20 avril - 19 mai           BLUMHUNDAL
+3 : 20 mai - 18 juin            GRÜNZEIT
+4 : 19 juin - 18 juillet        LICHTERWOLF
+5 : 19 juillet - 17 août        WARMEZAHN
+6 : 18 août - 16 septembre      
+7 : 17 septembre - 16 octobre   
+8 : 17 octobre - 15 novembre    
+9 : 16 novembre - 15 décembre   
+10 : 16 décembre - 14 janvier   
+11 : 15 janvier - 13 février    
+12 : 14 février - 15 mars       
+
+---------------------------------------
+
+1 : Albadi
+2 : Flavedi
+3 : Viridi
+4 : Rosadi
+5 : Rubidi
+6 : Céludi
+7 : Atridi
