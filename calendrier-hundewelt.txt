@@ -1,22 +1,22 @@
-1 : 21 mars - 19 avril          ANFAMBRE
-2 : 20 avril - 19 mai           BLUMHUNDAL
-3 : 20 mai - 18 juin            GRÜNZEIT
-4 : 19 juin - 18 juillet        LICHTERWOLF
-5 : 19 juillet - 17 août        WARMEZAHN
-6 : 18 août - 16 septembre      
-7 : 17 septembre - 16 octobre   
-8 : 17 octobre - 15 novembre    
-9 : 16 novembre - 15 décembre   
-10 : 16 décembre - 14 janvier   
-11 : 15 janvier - 13 février    
-12 : 14 février - 15 mars       
+1 : 21 mars - 19 avril          LEBENKRALLIS
+2 : 20 avril - 19 mai           BLUMHUNDIS
+3 : 20 mai - 18 juin            WALDMANTIS
+4 : 19 juin - 18 juillet        LICHTERWOLFIS
+5 : 19 juillet - 17 août        WARMEZAHNIS
+6 : 18 août - 16 septembre      STURMMAULIS
+7 : 17 septembre - 16 octobre   ERNTEWOLFIS
+8 : 17 octobre - 15 novembre    MISTPELTIS
+9 : 16 novembre - 15 décembre   EISZAHNIS
+10 : 16 décembre - 14 janvier   SCHATTENWOLFIS
+11 : 15 janvier - 13 février    SCHLAFHUNDIS
+12 : 14 février - 15 mars       TODESKRALLIS
+13e : 16 - 20 mars              ERWACHENWOLFIS
 
 ---------------------------------------
 
-1 : Albadi
-2 : Flavedi
-3 : Viridi
-4 : Rosadi
-5 : Rubidi
-6 : Céludi
-7 : Atridi
+1 : Soladi
+2 : Célédi
+3 : Terradi
+4 : Viridi
+5 : Vladroudi
+6 : Imperidi
